@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Simple Weather app</string>
+    <string name="title_home">Home</string>
+    <string name="title_map">Map</string>
+    <string name="province">Province</string>
+    <string name="city">City</string>
+    <string name="barangay">Barangay</string>
+    <string name="all_fields_are_required">All fields are required</string>
+    <string name="locate">Locate</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
