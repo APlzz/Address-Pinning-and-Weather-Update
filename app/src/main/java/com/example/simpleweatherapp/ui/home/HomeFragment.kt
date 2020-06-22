@@ -37,8 +37,6 @@ class HomeFragment : Fragment(){
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
 
 
         val root = inflater.inflate(R.layout.fragment_home, container, false)
@@ -75,7 +73,6 @@ class HomeFragment : Fragment(){
 
 
         submitAddressButton.setOnClickListener {
-
             if(activity?.let { it1 ->
                     ContextCompat.checkSelfPermission(
                         it1,
@@ -83,6 +80,7 @@ class HomeFragment : Fragment(){
 
                 // call api
                 if(checkFields()) {
+                    Toast.makeText(activity,"Please wait. Processing address",Toast.LENGTH_SHORT).show()
                     Log.i("geocoder","locating address")
 
                     val frag=MapFragment.newInstance("${editTextBarangay.text.toString()},"+
@@ -110,13 +108,13 @@ class HomeFragment : Fragment(){
                 Toast.makeText(activity,"You have Already Granted this",Toast.LENGTH_SHORT).show()
             }
             activity?.let { ActivityCompat.shouldShowRequestPermissionRationale(it,android.Manifest.permission.INTERNET) }!! -> {
-                AlertDialog.Builder(activity!!)
+                AlertDialog.Builder(requireActivity())
                     .setTitle("Internet Permission needed")
                     .setMessage("This Permission is needed to access the weather api")
                     .setPositiveButton("ok", DialogInterface.OnClickListener{ dialogInterface: DialogInterface, i: Int ->
                         fun onClick(dialog: DialogInterface, which: Int){
                             ActivityCompat.requestPermissions(
-                                activity!!,
+                                requireActivity(),
                                 arrayOf(android.Manifest.permission.INTERNET),internetRequestCode)
                         }
                     })
@@ -128,7 +126,7 @@ class HomeFragment : Fragment(){
                     .create().show()
             }
             else -> {
-                ActivityCompat.requestPermissions(activity!!,arrayOf(android.Manifest.permission.INTERNET),internetRequestCode)
+                ActivityCompat.requestPermissions(requireActivity(),arrayOf(android.Manifest.permission.INTERNET),internetRequestCode)
             }
         }
     }
@@ -146,6 +144,7 @@ class HomeFragment : Fragment(){
             }
         }
     }
+    
 
     companion object {
         val TAG = HomeFragment::class.java.simpleName

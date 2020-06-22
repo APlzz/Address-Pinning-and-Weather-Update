@@ -14,7 +14,7 @@ What was accomplished:
 
     [x] 1.
     [x] 2.
-        []2.a
-        []2.b
+        [x]2.a
+        [x]2.b
     [x] 3. * partial (some notes on the TODOS)
     []  4.
